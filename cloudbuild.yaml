@@ -10,6 +10,7 @@ steps:
 
 substitutions:
      _PROJECT: devops-374608
+     _REPO_NAME: github_masudd11_cloud-build-python-app
 
 options:
     substitution_option: 'ALLOW_LOOSE'
