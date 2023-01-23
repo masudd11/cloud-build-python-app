@@ -3,16 +3,16 @@ steps:
   args: ['clone', 'https://source.developers.google.com/p/${_PROJECT}/r/${_REPO_NAME}']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/${_PROJECT}/django-gunicorn:{_VERSION}', '.']
+  args: ['build', '-t', 'gcr.io/${_PROJECT}/django-gunicorn:8', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/${_PROJECT}/django-gunicorn:${_VERSION}']
+  args: ['push', 'gcr.io/${_PROJECT}/django-gunicorn:8']
 
 - name: 'gcr.io/cloud-builders/gke-deploy'
   args:
   - run
   - --filename=pyapp.yaml
-  - --image=gcr.io/_PROJECT/djanago-gunicorn:${_VERSION}
+  - --image=gcr.io/_PROJECT/djanago-gunicorn:8
   - --location=_LOCATION
   - --cluster=_CLUSTERNAME
 substitutions:
