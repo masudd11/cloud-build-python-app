@@ -12,7 +12,7 @@ steps:
   args:
   - run
   - --filename=pyapp.yaml
-  - --image=gcr.io/_PROJECT/djanago-gunicorn:8
+  - --image=gcr.io/_PROJECT/django-gunicorn:8
   - --location=_LOCATION
   - --cluster=_CLUSTERNAME
 substitutions:
