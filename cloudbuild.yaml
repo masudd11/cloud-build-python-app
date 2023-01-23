@@ -1,4 +1,18 @@
 steps:
 - name: 'gcr.io/cloud-builders/git'
-  args: ['clone', '']
-  
+  args: ['clone', 'https://source.developers.google.com/p/${_PROJECT}/r/${_REPO_NAME}']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/${_PROJECT}/django-gunicorn:7', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/${_PROJECT}/django-gunicorn:7']
+
+substitutions:
+     _PROJECT: devops-374608
+
+options:
+    substitution_option: 'ALLOW_LOOSE'
+    logging: 'CLOUD_LOGGING_ONLY'
+
+
