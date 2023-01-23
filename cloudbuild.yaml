@@ -8,9 +8,18 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/${_PROJECT}/django-gunicorn:7']
 
+- name: 'gcr.io/cloud-builders/gke-deploy'
+  args:
+  - run
+  - --filename=pyapp.yaml
+  - --image=gcr.io/_PROJECT/djanago-gunicorn:7
+  - --location=_LOCATION
+  - --cluster=_CLUSTERNAME
 substitutions:
      _PROJECT: devops-374608
      _REPO_NAME: github_masudd11_cloud-build-python-app
+     _LOCATION: us-central1-c
+     _CLUSTERNAME: python-cluster
 
 options:
     substitution_option: 'ALLOW_LOOSE'
