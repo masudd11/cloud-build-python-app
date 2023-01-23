@@ -3,16 +3,16 @@ steps:
   args: ['clone', 'https://source.developers.google.com/p/${_PROJECT}/r/${_REPO_NAME}']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/${_PROJECT}/django-gunicorn:7', '.']
+  args: ['build', '-t', 'gcr.io/${_PROJECT}/django-gunicorn:_{VERSION}', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/${_PROJECT}/django-gunicorn:7']
+  args: ['push', 'gcr.io/${_PROJECT}/django-gunicorn:${_VERSION}']
 
 - name: 'gcr.io/cloud-builders/gke-deploy'
   args:
   - run
   - --filename=pyapp.yaml
-  - --image=gcr.io/_PROJECT/djanago-gunicorn:7
+  - --image=gcr.io/_PROJECT/djanago-gunicorn:${_VERSION}
   - --location=_LOCATION
   - --cluster=_CLUSTERNAME
 substitutions:
@@ -20,6 +20,7 @@ substitutions:
      _REPO_NAME: github_masudd11_cloud-build-python-app
      _LOCATION: us-central1-c
      _CLUSTERNAME: python-cluster
+     _VERSION: v1.0
 
 options:
     substitution_option: 'ALLOW_LOOSE'
